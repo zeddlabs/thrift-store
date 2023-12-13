@@ -93,7 +93,7 @@ class Login extends BaseAuth
   protected function throwFailureValidationException(): never
   {
     throw ValidationException::withMessages([
-      'data.username' => __('filament-panels::pages/auth/login.messages.failed'),
+      'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
     ]);
   }
 
@@ -111,7 +111,7 @@ class Login extends BaseAuth
       'form' => $this->form(
         $this->makeForm()
           ->schema([
-            $this->getUsernameFormComponent(),
+            $this->getEmailFormComponent(),
             $this->getPasswordFormComponent(),
           ])
           ->statePath('data'),
@@ -119,10 +119,10 @@ class Login extends BaseAuth
     ];
   }
 
-  protected function getUsernameFormComponent(): Component
+  protected function getEmailFormComponent(): Component
   {
-    return TextInput::make('username')
-      ->label('Username')
+    return TextInput::make('email')
+      ->label(__('filament-panels::pages/auth/login.form.email.label'))
       ->required()
       ->autocomplete()
       ->autofocus()
@@ -193,7 +193,7 @@ class Login extends BaseAuth
   protected function getCredentialsFromFormData(array $data): array
   {
     return [
-      'username' => $data['username'],
+      'email' => $data['email'],
       'password' => $data['password'],
     ];
   }

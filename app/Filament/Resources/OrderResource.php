@@ -20,6 +20,7 @@ use App\Filament\Resources\OrderResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use Filament\Forms\Set;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 
@@ -148,6 +149,29 @@ class OrderResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('address')
+                    ->label('Alamat')
+                    ->icon('heroicon-o-eye')
+                    ->color('gray')
+                    ->form([
+                        TextInput::make('province')
+                            ->label('Provinsi'),
+                        TextInput::make('city')
+                            ->label('Kota'),
+                        TextInput::make('address')
+                            ->label('Alamat'),
+                        TextInput::make('more_address')
+                            ->label('Detail Lainnya'),
+                    ])
+                    ->fillForm(fn (Order $order) => [
+                        'province' => $order->province,
+                        'city' => $order->city,
+                        'address' => $order->address,
+                        'more_address' => $order->more_address,
+                    ])
+                    ->disabledForm()
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel('Tutup'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

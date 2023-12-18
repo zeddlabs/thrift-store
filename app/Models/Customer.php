@@ -15,4 +15,9 @@ class Customer extends Model
         'password',
         'whatsapp',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

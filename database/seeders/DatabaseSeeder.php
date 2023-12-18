@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
-            'whatsapp' => '081234567890',
         ]);
     }
 }

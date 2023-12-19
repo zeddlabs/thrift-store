@@ -15,6 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerResource extends Resource
 {
@@ -49,7 +50,9 @@ class CustomerResource extends Resource
                             ->label('Password')
                             ->required()
                             ->placeholder('Password Pelanggan')
-                            ->password(),
+                            ->password()
+                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                            ->hidden(fn (string $operation): bool => $operation === 'edit'),
                     ]),
             ]);
     }
